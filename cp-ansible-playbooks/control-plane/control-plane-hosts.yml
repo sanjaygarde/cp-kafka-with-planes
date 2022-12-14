@@ -1,0 +1,70 @@
+---
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu
+    ansible_become: true
+    ansible_ssh_private_key_file: /home/ubuntu/cp-ansible-workspace/sanjay-cops-us-west-2.pem
+
+    rbac_enabled: true
+    sasl_protocol: plain
+
+    create_mds_certs: false
+    token_services_public_pem_file: /home/ubuntu/cp-ansible-workspace/keys/public.pem
+    token_services_private_pem_file: /home/ubuntu/cp-ansible-workspace/keys/tokenKeypair.pem
+
+    kafka_broker_custom_properties:
+      ldap.com.sun.jndi.ldap.read.timeout: 3000
+      ldap.group.member.attribute.pattern: cn=(.*),ou=(.*),ou=people,dc=smart-inc,dc=com
+      ldap.group.name.attribute: cn
+      ldap.group.search.base: ou=people,dc=smart-inc,dc=com
+      ldap.java.naming.factory.initial: com.sun.jndi.ldap.LdapCtxFactory
+      ldap.java.naming.provider.url: ldap://172.31.6.200:389
+      ldap.java.naming.security.authentication: simple
+      ldap.java.naming.security.credentials: admin
+      ldap.java.naming.security.principal: cn=admin,dc=smart-inc,dc=com
+      ldap.search.mode: USERS
+      ldap.user.memberof.attribute.pattern: cn=(.*),ou=(.*),ou=people,dc=smart-inc,dc=com
+      ldap.user.name.attribute: uid
+      ldap.user.object.class: inetOrgPerson
+      ldap.user.search.base: dc=smart-inc,dc=com
+      ldap.user.search.scope: 2
+
+    ## LDAP USERS
+    mds_super_user: mds
+    mds_super_user_password: mds-secret
+    kafka_broker_ldap_user: kafka-broker
+    kafka_broker_ldap_password: kb-secret
+    control_center_ldap_user: c3
+    control_center_ldap_password: c3-secret
+
+    control_center_custom_properties:
+      confluent.controlcenter.kafka.data-plane.bootstrap.servers: 172.31.15.107:9092,172.31.1.230:9092,172.31.8.1:9092
+      confluent.controlcenter.kafka.data-plane.security.protocol: SASL_PLAINTEXT
+      confluent.controlcenter.kafka.data-plane.cprest.url: http://172.31.15.107:8090,http://172.31.1.230:8090,http://172.31.8.1:8090
+
+      confluent.controlcenter.kafka.data-plane.metadata.basic.auth.user.info: kafka-broker:kb-secret
+      confluent.controlcenter.kafka.data-plane.metadata.bootstrap.server.urls: http://172.31.5.171:8090,http://172.31.12.47:8090,http://172.31.11.37:8090
+      confluent.controlcenter.kafka.data-plane.metadata.http.auth.credentials.provider: BASIC
+
+zookeeper:
+  hosts:
+    172.31.6.200:
+      zookeeper_id: 1
+    172.31.14.226:
+      zookeeper_id: 2
+    172.31.9.48:
+      zookeeper_id: 3
+
+kafka_broker:
+  hosts:
+    172.31.5.171:
+      broker_id: 1
+    172.31.12.47:
+      broker_id: 2
+    172.31.11.37:
+      broker_id: 3
+
+control_center:
+  hosts:
+    172.31.13.137:

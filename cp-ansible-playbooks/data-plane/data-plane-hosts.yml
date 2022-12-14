@@ -1,0 +1,52 @@
+---
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu
+    ansible_become: true
+    ansible_ssh_private_key_file: /home/ubuntu/cp-ansible-workspace/sanjay-cops-us-west-2.pem
+
+
+    sasl_protocol: plain
+    create_mds_certs: false
+    token_services_public_pem_file: /home/ubuntu/cp-ansible-workspace/keys/public.pem
+    token_services_private_pem_file: /home/ubuntu/cp-ansible-workspace/keys/tokenKeypair.pem
+    rbac_enabled: true
+    external_mds_enabled: true
+    mds_broker_bootstrap_servers: 172.31.5.171:9091,172.31.12.47:9091,172.31.11.37:9091
+    confluent.metadata.security.protocol: SASL_PLAINTEXT
+    confluent.metadata.sasl.mechanism: PLAIN
+    confluent.metadata.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";
+    mds_bootstrap_server_urls: http://172.31.5.171:8090,http://172.31.12.47:8090,http://172.31.11.37:8090
+
+    mds_super_user: mds
+    mds_super_user_password: mds-secret
+    kafka_broker_ldap_user: kafka-broker
+    kafka_broker_ldap_password: kb-secret
+    control_center_ldap_user: c3
+    control_center_ldap_password: c3-secret
+
+    kafka_broker_custom_properties:
+      metric.reporters: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      confluent.metrics.reporter.bootstrap.servers: 172.31.5.171:9091,172.31.12.47:9091,172.31.11.37:9091
+      confluent.metrics.reporter.security.protocol: SASL_PLAINTEXT
+      confluent.metrics.reporter.sasl.mechanism: PLAIN
+      confluent.metrics.reporter.sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="admin" password="admin-secret";
+
+zookeeper:
+  hosts:
+    172.31.4.134:
+      zookeeper_id: 1
+    172.31.3.101:
+      zookeeper_id: 2
+    172.31.9.48:
+      zookeeper_id: 3
+
+kafka_broker:
+  hosts:
+    172.31.15.107:
+      broker_id: 1
+    172.31.1.230:
+      broker_id: 2
+    172.31.8.1:
+      broker_id: 3
