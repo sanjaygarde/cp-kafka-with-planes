@@ -26,4 +26,5 @@ ansible-playbook -i data-plane-hosts.yml confluent.platform.all
 Once your cluster have been built be sure to add the rolebindings to your 'c3' user or any user with which you plan to login to control center, this will ensure that both your clusters on visible 
 
 confluent iam rbac role-binding create --principal User:c3 --role SystemAdmin --kafka-cluster-id dj2lyE2ETqe8Hyc7VyUgDQ
+
 confluent iam rbac role-binding create --principal User:c3 --role ClusterAdmin --kafka-cluster-id dj2lyE2ETqe8Hyc7VyUgDQ
