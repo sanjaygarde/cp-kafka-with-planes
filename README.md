@@ -12,7 +12,9 @@ terraform apply
 If you plan to use Confluent's cp-ansible tool for building these clusters then the instructions are provided on Confluent docs web pages. Here are some important links:
 
 Prerequisites: https://docs.confluent.io/ansible/current/ansible-requirements.html
+
 Ansible playbooks: https://docs.confluent.io/ansible/current/ansible-download.html
+
 Runing the cp-ansible playbooks: https://docs.confluent.io/ansible/current/ansible-install.html#install-individual-cp-components
 
 E.g. you will use the commands below to build your clusters with cp-ansible ad in this order:
