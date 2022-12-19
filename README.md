@@ -1,5 +1,5 @@
 # cp-kafka-with-planes
-Set up Confluent platform Apache Kafka clusters with control and data planes
+Set up Confluent platform Apache Kafka clusters with control and data planes. Two separate clusters will be use one for processing your business data and the other for monitoring, authorization & administration.
 
 You can use thse terraform script to provision your infrastrcuture in this order:
 
